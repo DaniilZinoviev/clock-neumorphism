@@ -1,0 +1,93 @@
+$c-dark-blue: #091921;
+$c-white: #fff;
+$c-black: #000;
+$c-clock-hour: #d1d429;
+$c-clock-min: rgb(77, 77, 77);
+$c-clock-sec: rgb(204, 196, 196);
+$img-clock: '../img/clock.png';
+
+@mixin flex-center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    @include flex-center();
+    min-height: 100vh;
+    background: $c-dark-blue;
+}
+
+.clock {
+    @include flex-center();
+    width: 350px;
+    height: 350px;
+    background: url($img-clock);
+    background-size: cover;
+    border: 4px solid $c-dark-blue;
+    border-radius: 50%;
+    box-shadow: 0 -15px 15px rgba($c-white, 0.05),
+                inset 0 -15px 15px rgba($c-white, 0.05),
+                0 15px 15px rgba($c-black, 0.3),
+                inset 0 15px 15px rgba($c-black, 0.3);
+    
+    &::before {
+        content: '';
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: $c-white;
+        border-radius: 50%;
+        z-index: 100;
+    }
+    .hour, .min, .sec {
+        position: absolute;
+    }
+    
+    .hour, .hr {
+        width: 160px;
+        height: 160px;
+    }
+    .min, .mn {
+        width: 190px;
+        height: 190px;
+    }
+    .sec, .sc {
+        width: 230px;
+        height: 230px;
+    }
+
+    .hr, .mn, .sc {
+        display: flex;
+        justify-content: center;
+        &::before {
+            content: '';
+            position: absolute;
+            border-radius: 6px 6px 0 0;
+        }
+    }
+    .hr::before {
+        width: 8px;
+        height: 80px;
+        background: $c-clock-hour;
+        z-index: 10;
+    }
+
+    .mn::before {
+        width: 4px;
+        height: 90px;
+        background: $c-clock-min;
+        z-index: 11;
+    }
+
+    .sc::before {
+        width: 2px;
+        height: 110px;
+        background: $c-clock-sec;
+        z-index: 12;
+    }
+}
